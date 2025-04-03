@@ -1,26 +1,25 @@
+from typing import List
 import numpy as np
 from PIL import Image
 
 
 class Loader:
-    """Basic *.tiff image loader"""
+    """Basic image loader"""
 
-    def __init__(self, ext="tiff"):
-        self.ext = ext
+    def __init__(self):
+        pass
 
     def load(self, filepath):
-        if self.ext == "tiff":
-            out = self._load_tiff(filepath)
-            return out
+        out = self._load(filepath)
+        return out
 
     @staticmethod
-    def _load_tiff(filepath) -> np.ndarray:
+    def _load(filepath) -> np.ndarray:
         """
-        Loads a TIFF file and converts it to a grayscale NumPy array.
+        Loads a file and converts it to a grayscale NumPy array.
 
-        :param filepath: Path to the TIFF file.
-
-        :return: image (numpy.ndarray): Grayscale image as a NumPy array.
+        :param filepath: Path to the file
+        :return: image (numpy.ndarray): Grayscale image as an array
         """
         image = Image.open(filepath)
         image = np.array(image)
@@ -30,3 +29,10 @@ class Loader:
             image = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
 
         return image.astype(np.float64)
+
+    @staticmethod
+    def load_batch(filepath) -> List[np.ndarray]:
+        """
+        Loads a file made of a series of images into a list of grayscale-converted arrays.
+        """
+        raise NotImplementedError()

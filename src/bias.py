@@ -80,7 +80,7 @@ class BiasCorrector:
         return Normalizer(new_range=(0, 1)).fit_transform(img / bias_img)
 
     def plot(self, original_img, corrected_img, bias_img=None, cmap="grey"):
-        fig, axes = plt.subplots(1, 3, figsize=(20, 5))
+        fig, axes = plt.subplots(1, 3, figsize=(10, 5))
         titles = ["Original Image", "Estimated Bias Field", "Bias-Corrected Image"]
 
         images = [original_img, bias_img or self.bias_image, corrected_img]
